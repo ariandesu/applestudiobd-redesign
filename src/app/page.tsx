@@ -15,6 +15,7 @@ import {
 import { cn } from '@/lib/utils';
 import data from '@/data/data.json';
 import { type Product, type SiteData } from '@/lib/constants';
+import LightRays from '@/components/LightRays';
 
 const SiteData = data as SiteData;
 
@@ -57,127 +58,173 @@ export default function Home() {
   ];
 
   return (
-    <div className="min-h-screen bg-cream text-charcoal overflow-x-hidden">
-      {/* Header */}
-      <nav className="fixed top-0 w-full z-50 bg-cream/70 backdrop-blur-xl border-b border-slate-200/50">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <div className="flex items-center gap-3 group cursor-pointer">
-            <div className="w-9 h-9 rounded-full bg-charcoal text-cream flex items-center justify-center font-serif text-lg">A</div>
-            <span className="font-serif text-lg font-semibold tracking-tight">Apple Studio <span className="italic text-indigo-premium">BD</span></span>
-          </div>
-          <div className="flex items-center gap-4">
-            <a href="tel:01748405669" className="hidden sm:flex items-center gap-2 text-sm font-medium hover:text-indigo-premium transition">
-              <Phone className="w-4 h-4" /> Call
-            </a>
-            <a href="https://wa.me/8801748405669" className="bg-indigo-premium text-white px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition active:scale-95 flex items-center gap-2">
-              <MessageCircle className="w-4 h-4" /> WhatsApp
-            </a>
-          </div>
-        </div>
-      </nav>
+    <div className="min-h-screen bg-cream text-charcoal overflow-x-hidden relative">
+      {/* Light Rays Background */}
+      <LightRays
+        raysOrigin="top-center"
+        raysColor="#b4a896"
+        raysSpeed={0.5}
+        lightSpread={1.0}
+        rayLength={1.8}
+        pulsating={true}
+        followMouse={true}
+        mouseInfluence={0.15}
+        className="fixed inset-0"
+      />
 
-      {/* Hero */}
-      <section className="relative pt-32 pb-20 px-6 mesh-gradient">
-        <div className="max-w-4xl mx-auto text-center space-y-6">
-          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="inline-block px-3 py-1 rounded-full bg-indigo-50 text-indigo-premium text-[10px] font-bold tracking-widest uppercase border border-indigo-100">
-            Verified Dhanmondi Store
-          </motion.div>
-          <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="text-4xl sm:text-6xl lg:text-7xl font-serif font-medium leading-[1.1] tracking-tight">
-            Organic Intelligence. <br /><span className="italic text-indigo-premium">Pure Transparency.</span>
-          </motion.h1>
-          <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-            className="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto font-light leading-relaxed">
-            Bangladesh's most transparent Apple price list. 56+ rigorously inspected, 
-            fully certified devices backed by a 2-year service guarantee.
-          </motion.p>
-        </div>
-      </section>
-
-      {/* Filters */}
-      <div className="sticky top-[72px] z-40 bg-cream/80 backdrop-blur-md border-b border-slate-100 py-4 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col gap-4">
-          <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-none">
-            {categories.map(cat => (
-              <button key={cat.id} onClick={() => setCurrentCategory(cat.id)}
-                className={cn("px-4 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap border",
-                  currentCategory === cat.id ? "bg-charcoal text-white border-charcoal shadow-lg" : "bg-white text-slate-600 border-slate-200 hover:border-indigo-premium"
-                )}>{cat.label}</button>
-            ))}
+      {/* Content Layer */}
+      <div className="relative z-10">
+        {/* Header */}
+        <nav className="fixed top-0 w-full z-50 bg-cream/70 backdrop-blur-xl border-b border-slate-200/50">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div className="flex items-center gap-3 group cursor-pointer">
+              <div className="w-9 h-9 rounded-full bg-charcoal text-cream flex items-center justify-center font-serif text-lg">A</div>
+              <span className="font-serif text-lg font-semibold tracking-tight">Apple Studio <span className="italic text-indigo-premium">BD</span></span>
+            </div>
+            <div className="flex items-center gap-4">
+              <a href="tel:01748405669" className="hidden sm:flex items-center gap-2 text-sm font-medium hover:text-indigo-premium transition">
+                <Phone className="w-4 h-4" /> Call
+              </a>
+              <a href="https://wa.me/8801748405669" className="bg-indigo-premium text-white px-4 py-2 rounded-full text-sm font-semibold hover:opacity-90 transition active:scale-95 flex items-center gap-2">
+                <MessageCircle className="w-4 h-4" /> WhatsApp
+              </a>
+            </div>
           </div>
-          <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-              {budgets.map(b => (
-                <button key={b.id} onClick={() => setCurrentBudget(b.id)}
-                  className={cn("px-3 py-1 rounded-full text-[11px] font-medium transition-all whitespace-nowrap border",
-                    currentBudget === b.id ? "bg-indigo-premium text-white border-indigo-premium" : "bg-white text-slate-500 border-slate-200 hover:border-indigo-premium"
-                  )}>{b.label}</button>
+        </nav>
+
+        {/* Hero */}
+        <section className="relative pt-32 pb-20 px-6">
+          <div className="max-w-4xl mx-auto text-center space-y-6">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="inline-block px-3 py-1 rounded-full bg-warm-gold/10 text-charcoal text-[10px] font-bold tracking-widest uppercase border border-warm-gold/30"
+            >
+              Verified Dhanmondi Store
+            </motion.div>
+            <motion.h1 
+              initial={{ opacity: 0, y: 20 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.8, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="text-4xl sm:text-6xl lg:text-7xl font-serif font-medium leading-[1.1] tracking-tight"
+            >
+              Organic Intelligence. <br />
+              <span className="italic text-indigo-premium">Pure Transparency.</span>
+            </motion.h1>
+            <motion.p 
+              initial={{ opacity: 0, y: 20 }} 
+              animate={{ opacity: 1, y: 0 }} 
+              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              className="text-slate-600 text-base sm:text-lg max-w-2xl mx-auto font-light leading-relaxed"
+            >
+              Bangladesh's most transparent Apple price list. 56+ rigorously inspected, 
+              fully certified devices backed by a 2-year service guarantee.
+            </motion.p>
+          </div>
+        </section>
+
+        {/* Filters */}
+        <div className="sticky top-[72px] z-40 bg-cream/80 backdrop-blur-md border-b border-slate-100 py-4 px-6">
+          <div className="max-w-7xl mx-auto flex flex-col gap-4">
+            <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-none">
+              {categories.map(cat => (
+                <button 
+                  key={cat.id} 
+                  onClick={() => setCurrentCategory(cat.id)}
+                  className={cn(
+                    "px-4 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap border",
+                    currentCategory === cat.id ? "bg-charcoal text-white border-charcoal shadow-lg" : "bg-white text-slate-600 border-slate-200 hover:border-indigo-premium"
+                  )}
+                >
+                  {cat.label}
+                </button>
               ))}
             </div>
-            <div className="relative flex-1 max-w-[200px]">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
-              <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search..." className="w-full pl-9 pr-4 py-1.5 rounded-full border border-slate-200 bg-white text-xs focus:outline-none focus:ring-1 focus:ring-indigo-premium transition" />
+            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
+                {budgets.map(b => (
+                  <button 
+                    key={b.id} 
+                    onClick={() => setCurrentBudget(b.id)}
+                    className={cn(
+                      "px-3 py-1 rounded-full text-[11px] font-medium transition-all whitespace-nowrap border",
+                      currentBudget === b.id ? "bg-indigo-premium text-white border-indigo-premium" : "bg-white text-slate-500 border-slate-200 hover:border-indigo-premium"
+                    )}
+                  >
+                    {b.label}
+                  </button>
+                ))}
+              </div>
+              <div className="relative flex-1 max-w-[200px]">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-slate-400" />
+                <input 
+                  type="text" 
+                  value={searchQuery} 
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search..." 
+                  className="w-full pl-9 pr-4 py-1.5 rounded-full border border-slate-200 bg-white text-xs focus:outline-none focus:ring-1 focus:ring-indigo-premium transition" 
+                />
+              </div>
             </div>
           </div>
         </div>
+
+        {/* Grid */}
+        <main className="max-w-7xl mx-auto px-6 py-12">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <AnimatePresence mode="popLayout">
+              {filteredProducts.map((p) => (
+                <ProductCard key={p.id} product={p} />
+              ))}
+            </AnimatePresence>
+          </div>
+          {filteredProducts.length === 0 && (
+            <div className="text-center py-20">
+              <p className="text-slate-500 font-light">No devices found matching your criteria.</p>
+            </div>
+          )}
+        </main>
+
+        {/* Footer */}
+        <footer className="bg-charcoal text-cream pt-20 pb-12 px-6 rounded-t-[40px]">
+          <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
+            <div className="space-y-6">
+              <h2 className="text-3xl font-serif font-medium">Visit our showroom.</h2>
+              <p className="text-slate-400 font-light leading-relaxed max-w-md">
+                Level 3, Shop 3056, Rifles Square, Shimanto Shambhar Mall, Dhanmondi, Dhaka, Bangladesh.
+                Open everyday 11:00 AM – 8:30 PM (Closed Tuesdays).
+              </p>
+              <div className="flex items-center gap-4">
+                <a href="https://wa.me/8801748405669" className="bg-indigo-premium text-white px-6 py-3 rounded-full text-sm font-semibold flex items-center gap-2 hover:opacity-90 transition">
+                  <MessageCircle className="w-4 h-4" /> Request Visit
+                </a>
+                <a href="tel:01748405669" className="px-6 py-3 rounded-full border border-slate-700 text-sm font-semibold hover:bg-slate-800 transition">
+                  Call Store
+                </a>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-8 text-sm">
+              <div className="space-y-4">
+                <p className="font-serif text-lg">Service</p>
+                <ul className="space-y-2 text-slate-400 font-light">
+                  <li>10-Day Replacement</li>
+                  <li>2-Year Service Warranty</li>
+                  <li>OEM Certification</li>
+                </ul>
+              </div>
+              <div className="space-y-4">
+                <p className="font-serif text-lg">Socials</p>
+                <ul className="space-y-2 text-slate-400 font-light">
+                  <li>Facebook</li>
+                  <li>Instagram</li>
+                  <li>TikTok</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </footer>
       </div>
-
-      {/* Grid */}
-      <main className="max-w-7xl mx-auto px-6 py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <AnimatePresence mode="popLayout">
-            {filteredProducts.map((p) => (
-              <ProductCard key={p.id} product={p} />
-            ))}
-          </AnimatePresence>
-        </div>
-        {filteredProducts.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-slate-500 font-light">No devices found matching your criteria.</p>
-          </div>
-        )}
-      </main>
-
-      {/* Footer */}
-      <footer className="bg-charcoal text-cream pt-20 pb-12 px-6 rounded-t-[40px]">
-        <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
-          <div className="space-y-6">
-            <h2 className="text-3xl font-serif font-medium">Visit our showroom.</h2>
-            <p className="text-slate-400 font-light leading-relaxed max-w-md">
-              Level 3, Shop 3056, Rifles Square, Shimanto Shambhar Mall, Dhanmondi, Dhaka, Bangladesh.
-              Open everyday 11:00 AM – 8:30 PM (Closed Tuesdays).
-            </p>
-            <div className="flex items-center gap-4">
-              <a href="https://wa.me/8801748405669" className="bg-indigo-premium text-white px-6 py-3 rounded-full text-sm font-semibold flex items-center gap-2 hover:opacity-90 transition">
-                <MessageCircle className="w-4 h-4" /> Request Visit
-              </a>
-              <a href="tel:01748405669" className="px-6 py-3 rounded-full border border-slate-700 text-sm font-semibold hover:bg-slate-800 transition">
-                Call Store
-              </a>
-            </div>
-          </div>
-          <div className="grid grid-cols-2 gap-8 text-sm">
-            <div className="space-y-4">
-              <p className="font-serif text-lg">Service</p>
-              <ul className="space-y-2 text-slate-400 font-light">
-                <li>10-Day Replacement</li>
-                <li>2-Year Service Warranty</li>
-                <li>OEM Certification</li>
-              </ul>
-            </div>
-            <div className="space-y-4">
-              <p className="font-serif text-lg">Socials</p>
-              <ul className="space-y-2 text-slate-400 font-light">
-                <li>Facebook</li>
-                <li>Instagram</li>
-                <li>TikTok</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
